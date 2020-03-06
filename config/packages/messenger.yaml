@@ -1,0 +1,38 @@
+framework:
+    messenger:
+        # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
+        # failure_transport: failed
+
+#        default_bus: another.bus
+        default_bus: command.bus
+
+        transports:
+            # https://symfony.com/doc/current/messenger.html#transport-configuration
+            # async: '%env(MESSENGER_TRANSPORT_DSN)%'
+            # failed: 'doctrine://default?queue_name=failed'
+            # sync: 'sync://'
+            send_mail_async: '%env(MESSENGER_TRANSPORT_DSN)%'
+            rabbit_async: '%env(MESSENGER_TRANSPORT_AMQP_DSN)%'
+
+        routing:
+            # Route your messages to the transports
+            # 'App\Message\YourMessage': async
+            'App\Messenger\Command\SendMailCommand': send_mail_async
+#            'App\Messenger\Command\SaveToFileCommand': rabbit_async
+#            'App\Messenger\Command\SaveToFileCommand': send_mail_async
+
+        buses:
+            another.bus:
+                middleware:
+                    - 'App\Messenger\Middleware\TestMiddleware'
+
+            command.bus: ~
+
+            logging.bus:
+                middleware:
+                    - validation
+
+#            messenger.bus.default:
+#                default_middleware: false
+#                middleware:
+#                    - 'messenger.middleware.doctrine_clear_entity_manager'
