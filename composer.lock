@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "48fc7e59fc6082242567189318500bc1",
+    "content-hash": "65d3385009717a683c7d0531bda0dc4d",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2343,6 +2343,70 @@
                 "controllers"
             ],
             "time": "2019-12-27T08:57:19+00:00"
+        },
+        {
+            "name": "symfony-bundles/kafka-bundle",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony-bundles/kafka-bundle.git",
+                "reference": "84f29ad504cf6b62947dc495a29a41d7201bca5d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony-bundles/kafka-bundle/zipball/84f29ad504cf6b62947dc495a29a41d7201bca5d",
+                "reference": "84f29ad504cf6b62947dc495a29a41d7201bca5d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-pcntl": "*",
+                "ext-rdkafka": ">=4.0",
+                "php": "^7.3",
+                "symfony/framework-bundle": "^4.3 | ^5.0",
+                "symfony/yaml": "^4.3 | ^5.0"
+            },
+            "require-dev": {
+                "kwn/php-rdkafka-stubs": "^2.0",
+                "phpstan/phpstan": "^0.11",
+                "phpunit/php-code-coverage": "^7.0",
+                "phpunit/phpunit": "^8.4",
+                "psr/log": "^1.1"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SymfonyBundles\\KafkaBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Khaperets",
+                    "email": "khaperets@gmail.com"
+                }
+            ],
+            "description": "Symfony Kafka Bundle",
+            "homepage": "https://github.com/symfony-bundles/kafka-bundle",
+            "keywords": [
+                "bundle",
+                "kafka",
+                "php",
+                "rdkafka",
+                "symfony"
+            ],
+            "time": "2020-02-26T23:43:52+00:00"
         },
         {
             "name": "symfony/apache-pack",
@@ -7266,7 +7330,8 @@
         "php": "^7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-pcntl": "*"
     },
     "platform-dev": []
 }

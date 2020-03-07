@@ -165,6 +165,18 @@
             "./config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "symfony-bundles/kafka-bundle": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "acb28bd4822eed448d266096655d8301180de6df"
+        },
+        "files": [
+            "./config/packages/sb_kafka.yaml"
+        ]
+    },
     "symfony/apache-pack": {
         "version": "1.0",
         "recipe": {
