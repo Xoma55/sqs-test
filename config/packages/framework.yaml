@@ -26,4 +26,5 @@ framework:
             app.cache.redis:
                 adapter: cache.adapter.redis
                 public: true
-                provider: "redis://localhost:6379"
+#                provider: "redis://localhost:6379"
+                provider: "redis:?host[localhost]&redis_sentinel=mymaster"

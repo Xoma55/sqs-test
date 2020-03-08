@@ -9,6 +9,7 @@
         "ext-memcached": "*",
         "ext-pcntl": "*",
         "aws/aws-sdk-php": "^3.133",
+        "predis/predis": "^1.1",
         "ramsey/uuid": "^3.9",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony-bundles/kafka-bundle": "^2.2",
