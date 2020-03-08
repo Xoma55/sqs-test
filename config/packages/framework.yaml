@@ -14,3 +14,11 @@ framework:
     #fragments: true
     php_errors:
         log: true
+
+    cache:
+        # defaults to memcached://localhost
+        default_memcached_provider: "memcached://localhost:11211"
+        pools:
+            app.cache.products:
+                adapter: cache.adapter.memcached
+                public: true
