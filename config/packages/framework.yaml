@@ -22,3 +22,8 @@ framework:
             app.cache.products:
                 adapter: cache.adapter.memcached
                 public: true
+
+            app.cache.redis:
+                adapter: cache.adapter.redis
+                public: true
+                provider: "redis://localhost:6379"

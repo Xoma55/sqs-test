@@ -2,12 +2,13 @@
 
 namespace App\Controller;
 
+use App\Data\ProductInterface;
 use App\Messenger\Command\SendMailCommand;
+use App\Util\RedisTestInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class RedisTestController extends AbstractController
@@ -29,11 +30,15 @@ class RedisTestController extends AbstractController
     }
 
     /**
-     * @Route("/redis/info", methods="GET")
+     * @param RedisTestInterface $redisTest
+     * @return JsonResponse
+     * @Route("/redis/cache", methods="GET")
      */
-    public function info(Request $request): Response
+    public function cache(RedisTestInterface $redisTest)
     {
-        echo phpinfo();
-        die();
+        /** @var ProductInterface $product */
+        $product = $redisTest->test('03420133-ee27-48ca-8c80-8360d03c8c0b');
+
+        return new JsonResponse((array)$product);
     }
 }
