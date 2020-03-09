@@ -1,7 +1,7 @@
 framework:
     messenger:
         # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
-        # failure_transport: failed
+        failure_transport: failed
 
 #        default_bus: another.bus
         default_bus: command.bus
@@ -10,16 +10,36 @@ framework:
             # https://symfony.com/doc/current/messenger.html#transport-configuration
             # async: '%env(MESSENGER_TRANSPORT_DSN)%'
             # failed: 'doctrine://default?queue_name=failed'
-            # sync: 'sync://'
+            sync: 'sync://'
             send_mail_async: '%env(MESSENGER_TRANSPORT_DSN)%'
             rabbit_async: '%env(MESSENGER_TRANSPORT_AMQP_DSN)%'
+
+            async_priority_high:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: high
+                retry_strategy:
+                    max_retries: 3
+                    delay: 1000
+
+            async_priority_low:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: low
+                serializer: messenger.transport.symfony_serializer
+
+            failed:
+                dsn: '%env(MESSENGER_TRANSPORT_FAILED_DSN)%'
 
         routing:
             # Route your messages to the transports
             # 'App\Message\YourMessage': async
             'App\Messenger\Command\SendMailCommand': send_mail_async
-#            'App\Messenger\Command\SaveToFileCommand': rabbit_async
-#            'App\Messenger\Command\SaveToFileCommand': send_mail_async
+            #'App\Messenger\Command\SaveToFileCommand': rabbit_async
+            'App\Messenger\Command\SaveToFileCommand': sync
+
+            #'App\Message\SmsNotification':  async_priority_low
+            #'App\Message\NewUserWelcomeEmail':  async_priority_high
 
         buses:
             another.bus:
@@ -36,3 +56,9 @@ framework:
 #                default_middleware: false
 #                middleware:
 #                    - 'messenger.middleware.doctrine_clear_entity_manager'
+
+        serializer:
+            default_serializer: messenger.transport.symfony_serializer
+            symfony_serializer:
+                format: json
+                context: { }
