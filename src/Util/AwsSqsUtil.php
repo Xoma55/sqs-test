@@ -97,4 +97,27 @@ class AwsSqsUtil implements AwsSqsUtilInterface
     {
         $this->client->deleteQueue(['QueueUrl' => $url]);
     }
+
+    /**
+     * @link https://docs.aws.amazon.com/aws-sdk-php/v3/api/api-sqs-2012-11-05.html#receivemessage
+     */
+    public function receiveMessage(string $url): ?Message
+    {
+        /** @var Result $result */
+        $result = $this->client->receiveMessage([
+            'QueueUrl' => $url,
+            'MaxNumberOfMessages' => 1,
+        ]);
+
+        $message = null;
+        if (null !== $result->get('Messages')) {
+            $message = new Message();
+            $message->url = $url;
+            $message->id = $result->get('Messages')[0]['MessageId'];
+            $message->body = $result->get('Messages')[0]['Body'];
+            $message->receiptHandle = $result->get('Messages')[0]['ReceiptHandle'];
+        }
+
+        return $message;
+    }
 }
