@@ -2,9 +2,9 @@
 
 namespace App\Messenger\Consumer;
 
-use App\Model\Message;
+//use App\Model\Message;
 
 interface ConsumerInterface
 {
-    public function consume(Message $message, string $queue): void;
+//    public function consume(Message $message, string $queue): void;
 }

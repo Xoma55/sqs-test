@@ -34,9 +34,10 @@ framework:
         routing:
             # Route your messages to the transports
             # 'App\Message\YourMessage': async
-            'App\Messenger\Command\SendMailCommand': send_mail_async
+            'App\Messenger\Command\SendMailCommand': rabbit_async
+            #'App\Messenger\Command\SendMailCommand': send_mail_async
             #'App\Messenger\Command\SaveToFileCommand': rabbit_async
-            'App\Messenger\Command\SaveToFileCommand': sync
+            #'App\Messenger\Command\SaveToFileCommand': sync
 
             #'App\Message\SmsNotification':  async_priority_low
             #'App\Message\NewUserWelcomeEmail':  async_priority_high

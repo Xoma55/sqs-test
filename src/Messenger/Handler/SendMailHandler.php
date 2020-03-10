@@ -31,15 +31,13 @@ class SendMailHandler implements MessageHandlerInterface
     {
         try {
 
-            file_put_contents(rand(555555,7777777).'.txt', '11');
+            $email = new Email();
+            $email->from('hello@example.com')
+                ->to($message->getEmail())
+                ->subject('Just test')
+                ->text($message->getMessage());
 
-//            $email = new Email();
-//            $email->from('hello@example.com')
-//                ->to($message->getEmail())
-//                ->subject('Just test')
-//                ->text($message->getMessage());
-
-            //$this->mailer->send($email);
+            $this->mailer->send($email);
 
         } catch (TransportExceptionInterface $e) {
             throw new UnrecoverableMessageHandlingException('Mail not sent');
