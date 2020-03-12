@@ -43,9 +43,17 @@ services:
             $credentials: '%aws_sdk.credentials.default%'
 
     App\Messenger\Handler\SaveToFileHandler:
-#        autoconfigure: false
+        #autoconfigure: false
         tags:
             -
                 name: messenger.message_handler
                 handles: App\Messenger\Command\SaveToFileCommand
+                bus: another.bus
+
+    App\Messenger\Handler\SendMailHandler:
+        #autoconfigure: false
+        tags:
+            -
+                name: messenger.message_handler
+                handles: App\Messenger\Command\SendMailCommand
                 bus: another.bus
